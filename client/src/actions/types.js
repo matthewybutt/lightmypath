@@ -1,0 +1,5 @@
+export const FETCH_USER = 'fetch_user'
+export const FETCH_VERSE = 'fetch_verse'
+export const POST_VERSE = 'post_verse'
+export const FIND_VERSE = 'find_verse'
+export const DELETE_VERSE = 'delete_verse'

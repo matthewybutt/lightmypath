@@ -1,25 +1,35 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as actions from '../actions';
 
-import Header from './Header'
+import Header from './Header';
+import Landing from './Landing';
+import Verse from './Verse';
+import MyVerses from './MyVerses';
+import MemorizeVerse from './MemorizeVerse';
 
-const DashBoard = () => <h2>DashBoard</h2>
-const SurveyNew = () => <h2>SurveyNew</h2>
-const Landing = () => <h2>Landing</h2>
+class App extends Component {
+  componentDidMount() {
+    this.props.fetchUser();
+    // this.props.postVerse();
+  }
 
-const App = () => {
-  return (
-    <div>
-      <BrowserRouter>
-        <div>
-          <Header />
-          <Route exact path="/" component={Landing} />
-          <Route exact path="/surveys" component={DashBoard} />
-          <Route exact path="/surveys/new" component={SurveyNew} />
-        </div>
-      </BrowserRouter>
-    </div>
-  )
+  render() {
+    return (
+      <div className="container">
+        <BrowserRouter>
+          <div>
+            <Header />
+            <Route exact path="/" component={Landing} />
+            <Route exact path="/verse/my_verses" component={MyVerses} />
+            <Route exact path="/verse/new" component={Verse} />
+            <Route exact path="/memorize" component={MemorizeVerse} />
+          </div>
+        </BrowserRouter>
+      </div>
+    )
+  }
 };
 
-export default App;
+export default connect(null, actions)(App);
