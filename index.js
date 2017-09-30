@@ -29,7 +29,7 @@ app.use(passport.session());
 require('./routes/authRoutes')(app);
 require('./routes/verseRoutes')(app);
 
-if(process.env.node_ENV === 'production'){
+if(process.env.NODE_ENV === 'production'){
   //Express will serve roduction assets
   app.use(express.static('client/build'));
   //Express will serve up index.html if route not recognized
