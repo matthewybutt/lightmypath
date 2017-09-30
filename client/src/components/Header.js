@@ -11,8 +11,8 @@ class Header extends Component {
         return <li key="login"><a href="/auth/google">Login with Google</a></li>;
       default:
         return [
-          <li key="1"><Link to={"/verse/my_verses"}>My Verses</Link></li>,
-          <li key="2"><Link to={"/verse/new"}>New Verse</Link></li>,
+          <li key="1"><Link to={"/verse/new"}>New Verse</Link></li>,
+          <li key="2"><Link to={"/verse/my_verses"}>My Verses</Link></li>,
           <li key="3"><a href="/api/logout">Log Out</a></li>
         ]
     }

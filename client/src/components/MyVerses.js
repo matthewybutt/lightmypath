@@ -18,7 +18,6 @@ class MyVerses extends Component {
   }
 
   deleteVerse(verse){
-    let verseId = verse._id
     this.props.deleteVerse(verse).then(()=>this.props.fetchUser())
   }
 
@@ -27,6 +26,7 @@ class MyVerses extends Component {
     return(
       <div>
         <h1>My Verses</h1>
+        <h5>Select a verse to memorize</h5>
         {this.props.auth && this.props.auth.verses ?
           <VerseCards verses={this.props.auth.verses} fetchUser={this.props.fetchUser} selectVerse={this.selectVerse} deleteVerse={this.deleteVerse}/>
           :

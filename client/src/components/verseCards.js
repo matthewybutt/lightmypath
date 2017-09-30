@@ -6,14 +6,21 @@ class verseCards extends Component {
 
   createVerseCards(verses){
     let cards = []
+    let cardStyle = {
+      border: "1px solid black",
+      margin: "5px",
+      padding: "15px",
+      width: "30%",
+      borderRadius: "15px",
+      display: "inline-block",
+      verticalAlign: "top",
+    }
     verses.forEach((verse, i) => {
-      let card = <div key={i} style={{border:"1px solid black", margin:"5px", padding:"5px"}} >
-          <div onClick={(e) => this.props.selectVerse(verse)}>
-            <Link to={"/memorize"}>
-              <p>{verse.text}</p>
-              <p>{verse.citation}</p>
-            </Link>
-          </div>
+      let card = <div key={i} style={cardStyle} onClick={(e) => this.props.selectVerse(verse)}>
+          <Link to={"/memorize"} style={{color: "black"}}>
+            <p>{verse.text}</p>
+            <p style={{textAlign: "right"}}>-{verse.citation}</p>
+          </Link>
           <button onClick={(e) => this.props.deleteVerse(verse)}>Delete</button>
         </div>
       cards.push(card)
