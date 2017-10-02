@@ -90,7 +90,8 @@ class MemorizeVerse extends Component {
         let wordWidth = ((this.state.memorizeArray[i].length) * 10) + "px";
         let inputStyle = {
           width: wordWidth,
-          textAlign: "center"
+          textAlign: "center",
+          margin: "0 0 5px"
         };
         fields.push(<span key={i} style={{padding: "0 5px"}}><input id={i} type="text" ref="guessInput" placeholder="?" style={inputStyle} onChange={this.handleChange}/></span>)
       }
@@ -143,21 +144,22 @@ class MemorizeVerse extends Component {
     // console.log(this.props)
     console.log(this.state)
     return(
-      <div>
+      <div className="row" style={{padding:"25px"}}>
         <h1>Memorize Verse</h1>
         {!this.state.verseSet ?
-          <div>
+          <div className="col s12">
             <p>{this.props.verse.selectedVerse.text}</p>
             <p>{this.props.verse.selectedVerse.citation}</p>
             <button className="btn waves-effect waves-light red darken-4" onClick={this.setMemoryVerse}>Memorize Verse</button>
           </div>
           :
           <div>
-            <form id="memory-verse-form" onSubmit={this.handleSubmit}>
-              {this.memorizeVerse()}
-              <br/>
+            <form className="col s12" id="memory-verse-form" onSubmit={this.handleSubmit}>
+              <div style={{margin: "0 0 25px"}}>
+                {this.memorizeVerse()}
+              </div>
               {!this.state.answerSubmitted ?
-                <button onClick={this.submitAnswer}>Submit Answer</button>
+                <button className="btn waves-effect waves-light red darken-4" onClick={this.submitAnswer}>Submit Answer</button>
                 :
                 null
               }
@@ -165,16 +167,17 @@ class MemorizeVerse extends Component {
           </div>
         }
           {this.state.answerSubmitted ?
-            <div>
+            <div className="col s12">
               {this.state.answerCorrect ?
               <div>
                 <p>{this.state.answerResponse}</p>
                 <p>Keep Memorizing This Verse?</p>
-                <button onClick={this.keepPlaying}>Yes</button>
+                <button className="btn waves-effect waves-light red darken-4" onClick={this.keepPlaying}>Yes</button>
               </div>
               :
               <div>
                 <p>{this.state.answerResponse}</p>
+                <button className="btn waves-effect waves-light red darken-4" onClick={this.submitAnswer}>Submit Answer</button>
               </div>
             }
             </div>

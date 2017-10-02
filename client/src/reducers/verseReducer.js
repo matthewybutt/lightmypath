@@ -32,20 +32,25 @@ export default function (state = initialVerseState, action) {
   console.log("action- ", action)
   switch(action.type) {
     case POST_VERSE:
-      return action.payload || false;
-    case FIND_VERSE:
-      let verse;
-      if(action.payload.length > 0){
-        verse = Object.assign({}, state, setVerse(action.payload));
-        return verse;
-      } else {
-        verse = Object.assign({}, state, {error: "Sorry, we couldn't find what you were looking for!"})
+      let postVerse;
+      if(!action.error){
+        postVerse = Object.assign({}, state, action.payload)
+        return postVerse;
       }
-      return verse
+      return state;
+    case FIND_VERSE:
+      let findVerse;
+      if(action.payload.length > 0){
+        findVerse = Object.assign({}, state, setVerse(action.payload));
+        return findVerse;
+      } else {
+        findVerse = Object.assign({}, state, {error: "Sorry, we couldn't find what you were looking for!"})
+      }
+      return findVerse
     case FETCH_VERSE:
       if(!action.error){
-        let verse = Object.assign({}, state, {selectedVerse: action.payload});
-        return verse;
+        let fetchVerse = Object.assign({}, state, {selectedVerse: action.payload});
+        return fetchVerse;
       }
       return state
     case DELETE_VERSE:

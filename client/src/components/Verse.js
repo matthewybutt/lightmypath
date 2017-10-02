@@ -37,7 +37,9 @@ class Verse extends Component {
 
   saveVerse(e){
     e.preventDefault();
-    this.props.postVerse(this.props.verse.newVerse).then(()=>this.props.fetchUser())
+    this.props.postVerse(this.props.verse.newVerse)
+      .then(()=>this.props.fetchUser())
+      .then(()=>this.props.history.push('/verse/my_verses'))
   }
 
   searchAgain(e){
