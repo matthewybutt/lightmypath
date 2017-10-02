@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 class Header extends Component {
+
   renderContent() {
     switch(this.props.auth){
       case null:
@@ -17,12 +18,13 @@ class Header extends Component {
         ]
     }
   }
+
   render() {
     return (
-      <nav>
+      <nav className="red darken-4">
         <div className="nav-wrapper">
-          <Link to={'/'} className="left brand-logo">LMP</Link>
-          <ul id="nav-mobile" className="right hide-on-med-and-down">
+          <Link to={'/'} className="left brand-logo" style={{paddingLeft: "15px"}}>LMP</Link>
+          <ul className="right">
             {this.renderContent()}
           </ul>
         </div>

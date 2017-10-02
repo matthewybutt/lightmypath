@@ -6,22 +6,19 @@ class verseCards extends Component {
 
   createVerseCards(verses){
     let cards = []
-    let cardStyle = {
-      border: "1px solid black",
-      margin: "5px",
-      padding: "15px",
-      width: "30%",
-      borderRadius: "15px",
-      display: "inline-block",
-      verticalAlign: "top",
-    }
+
     verses.forEach((verse, i) => {
-      let card = <div key={i} style={cardStyle} onClick={(e) => this.props.selectVerse(verse)}>
-          <Link to={"/memorize"} style={{color: "black"}}>
-            <p>{verse.text}</p>
-            <p style={{textAlign: "right"}}>-{verse.citation}</p>
-          </Link>
-          <button onClick={(e) => this.props.deleteVerse(verse)}>Delete</button>
+      let card = <div className="col s12 m6" key={i} onClick={(e) => this.props.selectVerse(verse)}>
+          <div className="card">
+            <div className="card-content">
+              <span className="card-title">{verse.citation}</span>
+              <p>{verse.text}</p>
+            </div>
+            <div className="card-action">
+              <Link to={"/memorize"}><button className="btn waves-effect waves-light grey darken-3">Memorize</button></Link>
+              <button className="btn-flat waves-effect waves-light" style={{float:"right", color: "red"}} onClick={(e) => this.props.deleteVerse(verse)}>Delete</button>
+            </div>
+          </div>
         </div>
       cards.push(card)
     })
@@ -30,11 +27,11 @@ class verseCards extends Component {
 
   render(){
     return(
-      <div>
+      <div className="row">
         {this.props.verses.length ?
           this.createVerseCards(this.props.verses)
           :
-          <p>No verses!</p>
+          <p className="col s12">No verses!</p>
         }
 
       </div>

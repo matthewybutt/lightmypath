@@ -149,7 +149,7 @@ class MemorizeVerse extends Component {
           <div>
             <p>{this.props.verse.selectedVerse.text}</p>
             <p>{this.props.verse.selectedVerse.citation}</p>
-            <button onClick={this.setMemoryVerse}>Memorize Verse</button>
+            <button className="btn waves-effect waves-light red darken-4" onClick={this.setMemoryVerse}>Memorize Verse</button>
           </div>
           :
           <div>

@@ -9,12 +9,14 @@ class Verse extends Component {
     super(props);
     this.state = {
       citation:"",
-      error: ""
+      error: "",
+      showVerse: false
     }
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.saveVerse    = this.saveVerse.bind(this);
+    this.searchAgain    = this.searchAgain.bind(this);
 
   }
 
@@ -30,7 +32,7 @@ class Verse extends Component {
     //   this.setState({error: ""});
     // }
     // this.props.postVerse(this.state);
-    this.props.findVerse(this.state);
+    this.props.findVerse(this.state).then(()=>this.setState({showVerse:true}));
   }
 
   saveVerse(e){
@@ -38,34 +40,47 @@ class Verse extends Component {
     this.props.postVerse(this.props.verse.newVerse).then(()=>this.props.fetchUser())
   }
 
+  searchAgain(e){
+    e.preventDefault();
+    this.setState({showVerse:false});
+  }
+
   render() {
     console.log(this.props)
+        // {this.props.verse.newVerse && this.props.verse.newVerse.citation ?
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Enter a verse:
-            <input type="text" name="citation" placeholder="i.e.- Genesis 1:1" onChange={this.handleChange}/>
-          </label>
-          <input type="submit" value="Search"/>
-          <span style={{color: "red", padding: "0px 5px"}}>{this.state.error}</span>
-          {this.props.verse && this.props.verse.error ?
-            <span style={{color: "red", padding: "0px 5px"}}>{this.props.verse.error}</span>
-            :
-            null
-          }
-        </form>
-        {this.props.verse.newVerse && this.props.verse.newVerse.citation ?
+      <div className="row" style={{padding:"25px"}}>
+        {this.state.showVerse ?
           <div>
             <p>Here's the verse you searched for-</p>
+            <h5>{this.props.verse.newVerse.text}</h5>
+            <p style={{textAlign: "right", paddingRight: "20px"}}>-{this.props.verse.newVerse.citation}</p>
             <br/>
-            <h4>{this.props.verse.newVerse.text}</h4>
-            <p>{this.props.verse.newVerse.citation}</p>
-            <br/>
-            <p>Click the button below to save your verse</p>
-            <button onClick={this.saveVerse}>Save Verse</button>
+            <div className="row" style={{textAlign: "center"}}>
+              <div className="col s6">
+                <button className="btn waves-effect waves-light red darken-4" onClick={this.saveVerse}>Save Verse</button>
+              </div>
+              <div className="col s6">
+                <button className="btn-flat waves-effect waves-light" style={{color:"red"}} onClick={this.searchAgain}>Search Again</button>
+              </div>
+            </div>
           </div>
-          : null
+          :
+          <form className="col s12" onSubmit={this.handleSubmit}>
+            <div className="row" >
+              <div className="input-field col s12" >
+                <input id="citation" type="text" placeholder="i.e.- John 3:16" className="validate" onChange={this.handleChange}/>
+                <label htmlFor="citation" className="active">Enter a verse:</label>
+              </div>
+            </div>
+            <button className="btn waves-effect waves-light red darken-4" type="submit">Search</button>
+            <span style={{color: "red", padding: "0px 5px"}}>{this.state.error}</span>
+            {this.props.verse && this.props.verse.error ?
+              <span style={{color: "red", padding: "0px 5px"}}>{this.props.verse.error}</span>
+              :
+              null
+            }
+          </form>
         }
       </div>
     )
