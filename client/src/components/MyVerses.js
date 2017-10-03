@@ -13,7 +13,6 @@ class MyVerses extends Component {
   }
 
   selectVerse(verse){
-    console.log(verse)
     this.props.fetchVerse(verse)
   }
 
@@ -22,7 +21,7 @@ class MyVerses extends Component {
   }
 
   render() {
-    console.log(this.props)
+    // console.log(this.props)
     return(
       <div>
         <h1>My Verses</h1>
