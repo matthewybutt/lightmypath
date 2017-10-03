@@ -8,7 +8,6 @@ const User = mongoose.model('users')
 module.exports = app => {
   app.post('/api/find_verse', async (req, res) => {
     let scripture = req.body.citation
-    console.log(scripture)
     if(scripture === ""){
       res.send([])
     } else{
@@ -29,16 +28,10 @@ module.exports = app => {
     req.user.verses.push(verse);
     const user = await req.user.save()
     res.send(verse);
-    // res.redirect('/verse/my_verses');
-    res.redirect('/');
   })
 
   app.patch('/api/delete_verse', async (req, res) => {
-    console.log("req.body- ", req.body)
-    console.log("req.body._id- ", req.body._id)
-    console.log("req.user- ", req.user)
     let oId = mongoose.Types.ObjectId(req.body._id)
-    console.log("oId- ", oId)
 
     User.update(
       { googleId: req.user.googleId },

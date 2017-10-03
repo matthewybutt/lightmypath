@@ -29,7 +29,7 @@ function setVerse(v){
 }
 
 export default function (state = initialVerseState, action) {
-  console.log("action- ", action)
+  // console.log("action- ", action)
   switch(action.type) {
     case POST_VERSE:
       let postVerse;

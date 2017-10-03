@@ -48,8 +48,7 @@ class Verse extends Component {
   }
 
   render() {
-    console.log(this.props)
-        // {this.props.verse.newVerse && this.props.verse.newVerse.citation ?
+    // console.log(this.props)
     return (
       <div className="row" style={{padding:"25px"}}>
         {this.state.showVerse ?
