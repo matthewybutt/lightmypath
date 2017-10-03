@@ -31,12 +31,12 @@ class MemorizeVerse extends Component {
     if(!userGuess[e.target.id]){
       userGuess[e.target.id] = (e.target.value).toLowerCase()
     } else {
-      userGuess[e.target.id] = (e.target.value).toLowerCase
+      userGuess[e.target.id] = (e.target.value).toLowerCase()
     }
     if(!answerKey[e.target.id]){
-      answerKey[e.target.id] = (this.state.memorizeArray[e.target.id]).toLowerCase();
+      answerKey[e.target.id] = ((this.state.memorizeArray[e.target.id]).replace(/[^A-Za-z0-9_]/g,"")).toLowerCase();
     } else {
-      answerKey[e.target.id] = (this.state.memorizeArray[e.target.id]).toLowerCase();
+      answerKey[e.target.id] = ((this.state.memorizeArray[e.target.id]).replace(/[^A-Za-z0-9_]/g,"")).toLowerCase();
     }
     this.setState({userGuess: userGuess});
     this.setState({answerKey: answerKey});
@@ -101,24 +101,25 @@ class MemorizeVerse extends Component {
 
   submitAnswer(e){
     e.preventDefault();
-    console.log("Answer Submitted!")
-    this.setState({answerSubmitted: true})
-    for(var i in this.state.answerKey){
-      if(this.state.answerKey[i] === this.state.userGuess[i]){
-        this.setState({
-          answerResponse: "Correct!",
-          answerCorrect: true,
-          attempts: this.state.attempts + 1
-        })
-      } else {
-        this.setState({
-          answerResponse: "Try Again!",
-          answerCorrect: false
-        })
-        if(this.state.attempts > 1){
+    if(Object.keys(this.state.userGuess).length > 0){
+      this.setState({answerSubmitted: true})
+      for(var i in this.state.answerKey){
+        if(this.state.answerKey[i] === this.state.userGuess[i]){
           this.setState({
-            attempts: this.state.attempts - 1
+            answerResponse: "Correct!",
+            answerCorrect: true,
+            attempts: this.state.attempts + 1
           })
+        } else {
+          this.setState({
+            answerResponse: "Try Again!",
+            answerCorrect: false
+          })
+          if(this.state.attempts > 1){
+            this.setState({
+              attempts: this.state.attempts - 1
+            })
+          }
         }
       }
     }
@@ -142,7 +143,7 @@ class MemorizeVerse extends Component {
 
   render() {
     // console.log(this.props)
-    // console.log(this.state)
+    console.log(this.state)
     return(
       <div className="row" style={{padding:"25px"}}>
         <h1>Memorize Verse</h1>
@@ -166,24 +167,24 @@ class MemorizeVerse extends Component {
             </form>
           </div>
         }
-          {this.state.answerSubmitted ?
-            <div className="col s12">
-              {this.state.answerCorrect ?
-              <div>
-                <p>{this.state.answerResponse}</p>
-                <p>Keep Memorizing This Verse?</p>
-                <button className="btn waves-effect waves-light red darken-4" onClick={this.keepPlaying}>Yes</button>
-              </div>
-              :
-              <div>
-                <p>{this.state.answerResponse}</p>
-                <button className="btn waves-effect waves-light red darken-4" onClick={this.submitAnswer}>Submit Answer</button>
-              </div>
-            }
+        {this.state.answerSubmitted ?
+          <div className="col s12">
+            {this.state.answerCorrect ?
+            <div>
+              <p>{this.state.answerResponse}</p>
+              <p>Keep Memorizing This Verse?</p>
+              <button className="btn waves-effect waves-light red darken-4" onClick={this.keepPlaying}>Yes</button>
             </div>
             :
-            null
+            <div>
+              <p>{this.state.answerResponse}</p>
+              <button className="btn waves-effect waves-light red darken-4" onClick={this.submitAnswer}>Submit Answer</button>
+            </div>
           }
+          </div>
+          :
+          null
+        }
       </div>
     )
   }
