@@ -147,44 +147,48 @@ class MemorizeVerse extends Component {
     return(
       <div className="row" style={{padding:"25px"}}>
         <h1>Memorize Verse</h1>
-        {!this.state.verseSet ?
-          <div className="col s12">
-            <p>{this.props.verse.selectedVerse.text}</p>
-            <p>{this.props.verse.selectedVerse.citation}</p>
-            <button className="btn waves-effect waves-light red darken-4" onClick={this.setMemoryVerse}>Memorize Verse</button>
+        <div className="card">
+          <div className="card-content">
+            <p className="card-title">{this.props.verse.selectedVerse.citation}</p>
+              {!this.state.verseSet ?
+                <div>
+                  <p>{this.props.verse.selectedVerse.text}</p>
+                </div>
+                :
+                <form id="memory-verse-form" onSubmit={this.handleSubmit}>
+                  <div>
+                    {this.memorizeVerse()}
+                  </div>
+                </form>
+              }
           </div>
-          :
-          <div>
-            <form className="col s12" id="memory-verse-form" onSubmit={this.handleSubmit}>
-              <div style={{margin: "0 0 25px"}}>
-                {this.memorizeVerse()}
-              </div>
+          <div className="card-action" style={{textAlign: "center"}}>
+            {!this.state.verseSet ?
+              <button className="btn waves-effect waves-light red darken-4" onClick={this.setMemoryVerse}>Memorize Verse</button>
+              :
+              <div>
               {!this.state.answerSubmitted ?
                 <button className="btn waves-effect waves-light red darken-4" onClick={this.submitAnswer}>Submit Answer</button>
                 :
-                null
+                <div>
+                  {this.state.answerCorrect ?
+                  <div>
+                    <p style={{color:"green", fontWeight:"bold", marginTop:"0"}}>{this.state.answerResponse}</p>
+                    <p>Keep Memorizing This Verse?</p>
+                    <button className="btn waves-effect waves-light red darken-4" onClick={this.keepPlaying}>Yes</button>
+                  </div>
+                  :
+                  <div>
+                    <p style={{color:"red", fontStyle:"italic", fontWeight:"bold", marginTop:"0"}}>{this.state.answerResponse}</p>
+                    <button className="btn waves-effect waves-light red darken-4" onClick={this.submitAnswer}>Submit Answer</button>
+                  </div>
+                }
+                </div>
               }
-            </form>
-          </div>
-        }
-        {this.state.answerSubmitted ?
-          <div className="col s12">
-            {this.state.answerCorrect ?
-            <div>
-              <p>{this.state.answerResponse}</p>
-              <p>Keep Memorizing This Verse?</p>
-              <button className="btn waves-effect waves-light red darken-4" onClick={this.keepPlaying}>Yes</button>
             </div>
-            :
-            <div>
-              <p>{this.state.answerResponse}</p>
-              <button className="btn waves-effect waves-light red darken-4" onClick={this.submitAnswer}>Submit Answer</button>
-            </div>
-          }
+            }
           </div>
-          :
-          null
-        }
+        </div>
       </div>
     )
   }
