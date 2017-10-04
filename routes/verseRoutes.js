@@ -1,16 +1,18 @@
 const mongoose = require('mongoose');
 const requireLogin = require('../middlewares/requireLogin');
 const bible = require("bible-english");
+const keys = require('../config/keys');
 
 const Verse = mongoose.model('verses')
 const User = mongoose.model('users')
 
 module.exports = app => {
+
   app.post('/api/find_verse', async (req, res) => {
     let scripture = req.body.citation
     if(scripture === ""){
       res.send([])
-    } else{
+    } else {
       // Get verse
       bible.getVerse(scripture, function (err, data) {
           // console.log("bible API response- ", err || data);
@@ -24,7 +26,7 @@ module.exports = app => {
   })
 
   app.post('/api/post_verse', requireLogin, async (req, res) => {
-    const verse = await new Verse({citation: req.body.citation, text: req.body.text}).save()
+    const verse = await new Verse({citation: req.body.citation, text: req.body.text, userId: req.user.googleId}).save()
     req.user.verses.push(verse);
     const user = await req.user.save()
     res.send(verse);
@@ -32,7 +34,6 @@ module.exports = app => {
 
   app.patch('/api/delete_verse', async (req, res) => {
     let oId = mongoose.Types.ObjectId(req.body._id)
-
     User.update(
       { googleId: req.user.googleId },
       { $pull: { verses: { _id: oId } } },
@@ -46,5 +47,8 @@ module.exports = app => {
       }
     )
 
+    Verse.remove({ _id: oId }).exec()
+
   })
+
 }

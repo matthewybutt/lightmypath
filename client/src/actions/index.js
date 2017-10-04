@@ -30,4 +30,3 @@ export const deleteVerse = (verseId) => async dispatch => {
     dispatch({ type: DELETE_VERSE, payload: res.data });
   };
 
-
