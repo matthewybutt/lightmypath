@@ -32,7 +32,12 @@ class Verse extends Component {
     //   this.setState({error: ""});
     // }
     // this.props.postVerse(this.state);
-    this.props.findVerse(this.state).then(()=>this.setState({showVerse:true}));
+
+    if(this.state.citation.length > 0){
+      this.props.findVerse(this.state).then(()=>this.setState({showVerse:true, error: ""}));
+    } else {
+      this.setState({error: "Please enter a verse!"});
+    }
   }
 
   saveVerse(e){
@@ -44,15 +49,20 @@ class Verse extends Component {
 
   searchAgain(e){
     e.preventDefault();
-    this.setState({showVerse:false});
+    this.setState({
+      citation:"",
+      error: "",
+      showVerse: false
+    });
   }
 
   render() {
-    // console.log(this.props)
+    console.log(this.props)
+    console.log(this.state)
     return (
       <div className="row" style={{padding:"25px"}}>
         <h3>New Verse</h3>
-        {this.state.showVerse ?
+        {this.state.showVerse && this.props.verse.newVerse ?
           <div>
             <h5>Here's the verse you searched for-</h5>
             <div className="card">
