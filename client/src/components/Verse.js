@@ -51,17 +51,17 @@ class Verse extends Component {
     // console.log(this.props)
     return (
       <div className="row" style={{padding:"25px"}}>
+        <h3>New Verse</h3>
         {this.state.showVerse ?
           <div>
-            <p>Here's the verse you searched for-</p>
-            <h5>{this.props.verse.newVerse.text}</h5>
-            <p style={{textAlign: "right", paddingRight: "20px"}}>-{this.props.verse.newVerse.citation}</p>
-            <br/>
-            <div className="row" style={{textAlign: "center"}}>
-              <div className="col s6">
-                <button className="btn waves-effect waves-light red darken-4" onClick={this.saveVerse}>Save Verse</button>
+            <h5>Here's the verse you searched for-</h5>
+            <div className="card">
+              <div className="card-content">
+                <p className="card-title">{this.props.verse.newVerse.citation}</p>
+                <p>{this.props.verse.newVerse.text}</p>
               </div>
-              <div className="col s6">
+              <div className="card-action" style={{textAlign: "center"}}>
+                <button className="btn waves-effect waves-light red darken-4" onClick={this.saveVerse}>Save Verse</button>
                 <button className="btn-flat waves-effect waves-light" style={{color:"red"}} onClick={this.searchAgain}>Search Again</button>
               </div>
             </div>

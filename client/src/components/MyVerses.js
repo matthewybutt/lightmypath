@@ -23,8 +23,8 @@ class MyVerses extends Component {
   render() {
     // console.log(this.props)
     return(
-      <div>
-        <h1>My Verses</h1>
+      <div className="row" style={{padding:"25px"}}>
+        <h3>My Verses</h3>
         <h5>Select a verse to memorize</h5>
         {this.props.auth && this.props.auth.verses ?
           <VerseCards verses={this.props.auth.verses} fetchUser={this.props.fetchUser} selectVerse={this.selectVerse} deleteVerse={this.deleteVerse}/>

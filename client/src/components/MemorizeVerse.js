@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import * as actions from '../actions';
 
 class MemorizeVerse extends Component {
@@ -142,53 +143,62 @@ class MemorizeVerse extends Component {
   }
 
   render() {
-    // console.log(this.props)
+    console.log(this.props)
     console.log(this.state)
     return(
       <div className="row" style={{padding:"25px"}}>
-        <h1>Memorize Verse</h1>
-        <div className="card">
-          <div className="card-content">
-            <p className="card-title">{this.props.verse.selectedVerse.citation}</p>
-              {!this.state.verseSet ?
-                <div>
-                  <p>{this.props.verse.selectedVerse.text}</p>
-                </div>
-                :
-                <form id="memory-verse-form" onSubmit={this.handleSubmit}>
+      {Object.keys(this.props.verse.selectedVerse).length > 0?
+        <div>
+          <h3>Memorize Verse</h3>
+          <div className="card">
+            <div className="card-content">
+              <p className="card-title">{this.props.verse.selectedVerse.citation}</p>
+                {!this.state.verseSet ?
                   <div>
-                    {this.memorizeVerse()}
-                  </div>
-                </form>
-              }
-          </div>
-          <div className="card-action" style={{textAlign: "center"}}>
-            {!this.state.verseSet ?
-              <button className="btn waves-effect waves-light red darken-4" onClick={this.setMemoryVerse}>Memorize Verse</button>
-              :
-              <div>
-              {!this.state.answerSubmitted ?
-                <button className="btn waves-effect waves-light red darken-4" onClick={this.submitAnswer}>Submit Answer</button>
-                :
-                <div>
-                  {this.state.answerCorrect ?
-                  <div>
-                    <p style={{color:"green", fontWeight:"bold", marginTop:"0"}}>{this.state.answerResponse}</p>
-                    <p>Keep Memorizing This Verse?</p>
-                    <button className="btn waves-effect waves-light red darken-4" onClick={this.keepPlaying}>Yes</button>
+                    <p>{this.props.verse.selectedVerse.text}</p>
                   </div>
                   :
+                  <form id="memory-verse-form" onSubmit={this.handleSubmit}>
+                    <div>
+                      {this.memorizeVerse()}
+                    </div>
+                  </form>
+                }
+            </div>
+            <div className="card-action" style={{textAlign: "center"}}>
+              {!this.state.verseSet ?
+                <button className="btn waves-effect waves-light red darken-4" onClick={this.setMemoryVerse}>Memorize Verse</button>
+                :
+                <div>
+                {!this.state.answerSubmitted ?
+                  <button className="btn waves-effect waves-light red darken-4" onClick={this.submitAnswer}>Submit Answer</button>
+                  :
                   <div>
-                    <p style={{color:"red", fontStyle:"italic", fontWeight:"bold", marginTop:"0"}}>{this.state.answerResponse}</p>
-                    <button className="btn waves-effect waves-light red darken-4" onClick={this.submitAnswer}>Submit Answer</button>
+                    {this.state.answerCorrect ?
+                    <div>
+                      <h5 style={{color:"green", fontWeight:"bold", marginTop:"0"}}>{this.state.answerResponse}</h5>
+                      <p>Keep Memorizing This Verse?</p>
+                      <button className="btn waves-effect waves-light red darken-4" onClick={this.keepPlaying}>Yes</button>
+                    </div>
+                    :
+                    <div>
+                      <h5 style={{color:"red", fontStyle:"italic", fontWeight:"bold", marginTop:"0"}}>{this.state.answerResponse}</h5>
+                      <button className="btn waves-effect waves-light red darken-4" onClick={this.submitAnswer}>Submit Answer</button>
+                    </div>
+                  }
                   </div>
                 }
-                </div>
+              </div>
               }
             </div>
-            }
           </div>
         </div>
+        :
+        <div style={{textAlign:"center"}}>
+          <h5>Please select a verse from your saved verses!</h5>
+          <Link to={"/verse/my_verses"}><button className="btn waves-effect waves-light red darken-4">My Verses</button></Link>
+        </div>
+      }
       </div>
     )
   }
