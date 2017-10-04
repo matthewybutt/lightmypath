@@ -13,7 +13,7 @@ module.exports = app => {
     } else{
       // Get verse
       bible.getVerse(scripture, function (err, data) {
-          console.log("bible API response- ", err || data);
+          // console.log("bible API response- ", err || data);
           if(data){
             res.send(data)
           } else {

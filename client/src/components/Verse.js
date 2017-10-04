@@ -57,8 +57,8 @@ class Verse extends Component {
   }
 
   render() {
-    console.log(this.props)
-    console.log(this.state)
+    // console.log(this.props)
+    // console.log(this.state)
     return (
       <div className="row" style={{padding:"25px"}}>
         <h3>New Verse</h3>
