@@ -15,8 +15,14 @@ class verseCards extends Component {
               <p>{verse.text}</p>
             </div>
             <div className="card-action">
-              <Link to={"/memorize"}><button className="btn waves-effect waves-light grey darken-3">Memorize</button></Link>
-              <button className="btn-flat waves-effect waves-light" style={{float:"right", color: "red"}} onClick={(e) => this.props.deleteVerse(verse)}>Delete</button>
+              <div className="row" style={{textAlign: "center"}}>
+                <div className="col s6">
+                  <Link to={"/memorize"}><button className="btn waves-effect waves-light grey darken-3">Memorize</button></Link>
+                </div>
+                <div className="col s6">
+                  <button className="btn-flat waves-effect waves-light" style={{color: "red"}} onClick={(e) => this.props.deleteVerse(verse)}>Delete</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

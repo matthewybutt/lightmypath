@@ -9,6 +9,8 @@ import Verse from './Verse';
 import MyVerses from './MyVerses';
 import MemorizeVerse from './MemorizeVerse';
 
+import "./app.css"
+
 class App extends Component {
   componentDidMount() {
     this.props.fetchUser();
@@ -17,9 +19,9 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div>
         <BrowserRouter>
-          <div>
+          <div className="container">
             <Header />
             <Route exact path="/" component={Landing} />
             <Route exact path="/verse/my_verses" component={MyVerses} />
