@@ -1,5 +1,5 @@
 html {
-  background: linear-gradient(0deg, black, white 70%) no-repeat center center fixed;
+  background: linear-gradient(90deg, #cacaca, white 15%, white 85%, #cacaca) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

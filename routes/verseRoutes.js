@@ -26,7 +26,13 @@ module.exports = app => {
   })
 
   app.post('/api/post_verse', requireLogin, async (req, res) => {
-    const verse = await new Verse({citation: req.body.citation, text: req.body.text, userId: req.user.googleId}).save()
+    const verse = await new Verse({
+      citation: req.body.citation,
+      text: req.body.text,
+      attempts: req.body.attempts,
+      maxAttempts: req.body.maxAttempts,
+      userId: req.user.googleId
+    }).save()
     req.user.verses.push(verse);
     const user = await req.user.save()
     res.send(verse);

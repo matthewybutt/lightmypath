@@ -21,7 +21,7 @@ class Header extends Component {
 
   render() {
     return (
-      <nav className="red darken-4">
+      <nav className="blue darken-1">
         <div className="nav-wrapper">
           <Link to={'/'} className="left brand-logo" style={{paddingLeft: "15px"}}>LMP</Link>
           <ul className="right">

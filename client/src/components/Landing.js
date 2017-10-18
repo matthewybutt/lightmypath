@@ -13,14 +13,14 @@ class Landing extends Component {
         {this.props.auth ?
           <div className="row">
             <div className="col s6" style={{textAlign:"right"}}>
-              <Link to={"/verse/new"}><button className="btn waves-effect waves-light red darken-4">New Verse</button></Link>
+              <Link to={"/verse/new"}><button className="btn waves-effect waves-light blue darken-1">New Verse</button></Link>
             </div>
             <div className="col s6" style={{textAlign:"left"}}>
-              <Link to={"/verse/my_verses"}><button className="btn waves-effect waves-light red darken-4">My Verses</button></Link>
+              <Link to={"/verse/my_verses"}><button className="btn waves-effect waves-light blue darken-1">My Verses</button></Link>
             </div>
           </div>
           :
-          <a href="/auth/google"><button className="btn waves-effect waves-light red darken-4">Log In</button></a>
+          <a href="/auth/google"><button className="btn waves-effect waves-light blue darken-1">Log In</button></a>
         }
       </div>
     )

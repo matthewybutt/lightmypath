@@ -13,6 +13,7 @@ class MemorizeVerse extends Component {
       wordsToOmit: [],
       verseSet: false,
       attempts: 1,
+      maxAttempts: 1,
       answerKey: {},
       userGuess: {},
       answerSubmitted: false,
@@ -24,6 +25,15 @@ class MemorizeVerse extends Component {
     this.submitAnswer = this.submitAnswer.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.keepPlaying = this.keepPlaying.bind(this);
+  }
+
+  componentDidMount(){
+    if(this.props.verse.selectedVerse.attempts > 1){
+      this.setState({attempts: this.props.verse.selectedVerse.attempts})
+    }
+    if(this.props.verse.selectedVerse.maxAttempts > 1){
+      this.setState({maxAttempts: this.props.verse.selectedVerse.maxAttempts})
+    }
   }
 
   handleChange(e){
@@ -111,6 +121,7 @@ class MemorizeVerse extends Component {
             answerCorrect: true,
             attempts: this.state.attempts + 1
           })
+
         } else {
           this.setState({
             answerResponse: "Try Again!",
@@ -124,6 +135,7 @@ class MemorizeVerse extends Component {
         }
       }
     }
+    //add PATCH verse call here to update attempts in DB
   }
 
   keepPlaying(){
@@ -167,23 +179,23 @@ class MemorizeVerse extends Component {
             </div>
             <div className="card-action" style={{textAlign: "center"}}>
               {!this.state.verseSet ?
-                <button className="btn waves-effect waves-light red darken-4" onClick={this.setMemoryVerse}>Memorize Verse</button>
+                <button className="btn waves-effect waves-light blue darken-1" onClick={this.setMemoryVerse}>Memorize Verse</button>
                 :
                 <div>
                 {!this.state.answerSubmitted ?
-                  <button className="btn waves-effect waves-light red darken-4" onClick={this.submitAnswer}>Submit Answer</button>
+                  <button className="btn waves-effect waves-light blue darken-1" onClick={this.submitAnswer}>Submit Answer</button>
                   :
                   <div>
                     {this.state.answerCorrect ?
                     <div>
                       <h5 style={{color:"green", fontWeight:"bold", marginTop:"0"}}>{this.state.answerResponse}</h5>
                       <p>Keep Memorizing This Verse?</p>
-                      <button className="btn waves-effect waves-light red darken-4" onClick={this.keepPlaying}>Yes</button>
+                      <button className="btn waves-effect waves-light blue darken-1" onClick={this.keepPlaying}>Yes</button>
                     </div>
                     :
                     <div>
                       <h5 style={{color:"red", fontStyle:"italic", fontWeight:"bold", marginTop:"0"}}>{this.state.answerResponse}</h5>
-                      <button className="btn waves-effect waves-light red darken-4" onClick={this.submitAnswer}>Submit Answer</button>
+                      <button className="btn waves-effect waves-light blue darken-1" onClick={this.submitAnswer}>Submit Answer</button>
                     </div>
                   }
                   </div>

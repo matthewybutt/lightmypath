@@ -18,12 +18,15 @@ function setVerse(v){
       text = text + " " + v[i].text
     }
   }
+  let maxAttempts = text.split(" ").length
   let newVerse = {
     bookname: v[0].bookname,
     chapter: v[0].chapter,
     text: he.decode(text),
     verse: verse,
-    citation: citation
+    citation: citation,
+    attempts: 0,
+    maxAttempts: maxAttempts || 0
   }
   return {newVerse, error: null}
 }

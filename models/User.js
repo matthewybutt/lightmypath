@@ -7,7 +7,9 @@ const userSchema = new Schema({
   verses: [{
     citation: String,
     text: String,
-    dateVerseAdded: { type: Date, default: Date.now }
+    dateVerseAdded: { type: Date, default: Date.now },
+    attempts: Number,
+    maxAttempts: Number
   }]
 })
 

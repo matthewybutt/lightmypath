@@ -71,7 +71,7 @@ class Verse extends Component {
                 <p>{this.props.verse.newVerse.text}</p>
               </div>
               <div className="card-action" style={{textAlign: "center"}}>
-                <button className="btn waves-effect waves-light red darken-4" onClick={this.saveVerse}>Save Verse</button>
+                <button className="btn waves-effect waves-light blue darken-1" onClick={this.saveVerse}>Save Verse</button>
                 <button className="btn-flat waves-effect waves-light" style={{color:"red"}} onClick={this.searchAgain}>Search Again</button>
               </div>
             </div>
@@ -84,7 +84,7 @@ class Verse extends Component {
                 <label htmlFor="citation" className="active">Enter a verse:</label>
               </div>
             </div>
-            <button className="btn waves-effect waves-light red darken-4" type="submit">Search</button>
+            <button className="btn waves-effect waves-light blue darken-1" type="submit">Search</button>
             <span style={{color: "red", padding: "0px 5px"}}>{this.state.error}</span>
             {this.props.verse && this.props.verse.error ?
               <span style={{color: "red", padding: "0px 5px"}}>{this.props.verse.error}</span>
