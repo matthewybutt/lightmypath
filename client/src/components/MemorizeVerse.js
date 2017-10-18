@@ -208,7 +208,7 @@ class MemorizeVerse extends Component {
         :
         <div style={{textAlign:"center"}}>
           <h5>Please select a verse from your saved verses!</h5>
-          <Link to={"/verse/my_verses"}><button className="btn waves-effect waves-light red darken-4">My Verses</button></Link>
+          <Link to={"/verse/my_verses"}><button className="btn waves-effect waves-light blue darken-1">My Verses</button></Link>
         </div>
       }
       </div>

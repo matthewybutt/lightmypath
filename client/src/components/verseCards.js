@@ -9,7 +9,7 @@ class verseCards extends Component {
 
     verses.forEach((verse, i) => {
       let card = <div className="col s12 m6" key={i} onClick={(e) => this.props.selectVerse(verse)}>
-          <div className="card">
+          <div className="card small">
             <div className="card-content">
               <span className="card-title">{verse.citation}</span>
               <p>{verse.text}</p>
