@@ -9,7 +9,7 @@ require('./models/User');
 require('./models/Verse');
 require('./services/passport');
 
-mongoose.connect(keys.mongoURI);
+mongoose.connect(keys.mongoURI, { useMongoClient: true });
 
 const app = express();
 
@@ -39,4 +39,5 @@ if(process.env.NODE_ENV === 'production'){
 }
 
 const PORT = process.env.PORT || 5000
+console.log(PORT)
 app.listen(PORT);
