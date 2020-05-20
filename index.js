@@ -9,7 +9,7 @@ require('./models/User');
 require('./models/Verse');
 require('./services/passport');
 
-mongoose.connect(keys.mongoURI, { useMongoClient: true });
+mongoose.connect(keys.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const app = express();
 
@@ -29,7 +29,7 @@ require('./routes/authRoutes')(app);
 require('./routes/verseRoutes')(app);
 
 if(process.env.NODE_ENV === 'production'){
-  //Express will serve roduction assets
+  //Express will serve production assets
   app.use(express.static('client/build'));
   //Express will serve up index.html if route not recognized
   const path = require('path');
@@ -39,5 +39,4 @@ if(process.env.NODE_ENV === 'production'){
 }
 
 const PORT = process.env.PORT || 5000
-console.log(PORT)
 app.listen(PORT);
