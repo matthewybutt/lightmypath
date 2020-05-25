@@ -3,7 +3,9 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const mongoose = require('mongoose');
 const keys = require('../config/keys');
 
-const User = mongoose.model('users')
+const User = mongoose.model('users');
+
+const callbackURL = process.env.NODE_ENV ? '/auth/google/callback' : 'http://localhost:3000/auth/google/callback';
 
 passport.serializeUser(function(user, done) {
   done(null, user.id);
@@ -15,12 +17,13 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
+
 passport.use(
   new GoogleStrategy(
     {
       clientID: keys.googleClientID,
       clientSecret: keys.googleClientSecret,
-      callbackURL: 'http://localhost:3000/auth/google/callback',
+      callbackURL: callbackURL,
       proxy: true
     },
     (accessToken, refreshToken, profile, cb) => {
